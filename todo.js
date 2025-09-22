@@ -1,4 +1,4 @@
-let taskList = [
+let taskList = JSON.parse(localStorage.getItem("Array")) || [
   {
     item: "Buy Groceries",
     dueDate: "2024-06-10",
@@ -8,55 +8,61 @@ let taskList = [
     dueDate: "2024-06-11",
   },
 ];
-
 let taskInput = document.querySelector("#task-input");
 let addTaskBtn = document.querySelector(".addTask-btn");
 let dateInput = document.querySelector("#date-input");
 displayTasks();
 addTaskBtn.addEventListener("click", () => {
-  let inputValue, dateValue;
-  
-  if (!taskInput.value || !dateInput.value) {
+
+if (!taskInput.value || !dateInput.value) {
     alert("Please fill the complete form");
-  } else {
-    inputValue = taskInput.value;
-    dateValue = dateInput.value;
+    return; // stop execution agar empty hai
   }
 
-  if (inputValue && dateValue) {
-    let newTask = {
-      item: taskInput.value,
-      dueDate: dateInput.value,
-    };
-    taskList.push(newTask);
-    displayTasks();
-    clearInput();
-  }
+  let newTask = {
+    item: taskInput.value,
+    dueDate: dateInput.value,
+  };
+
+  taskList.push(newTask);
+  saveTodo(taskList);
+  displayTasks();
+  clearInput();
+  
 });
 
 function displayTasks() {
-  console.log(taskList);
+  let storedTaskList = getTodo();
   let taskcontainer = document.querySelector(".task-container");
   let newHtml = "";
-  for (let i = 0; i < taskList.length; i++) {
-    let { item, dueDate } = taskList[i];
+  for (let i = 0; i < storedTaskList.length; i++) {
+    let { item, dueDate } = storedTaskList[i];
     newHtml += `
         
         <span id="item">${item}</span>
         <span id="date">${dueDate}</span>
-        <button class='btn-delete' onclick="deleteTask(${i})">Delete</button>
-        
-        
+        <button class='btn-delete' onclick="deleteTask(${
+          (i)
+        })">Delete</button>
       `;
   }
   taskcontainer.innerHTML = newHtml;
 }
-
+function getTodo() {
+  let getTodoList = JSON.parse(localStorage.getItem("Array"));
+  return getTodoList;
+}
+function saveTodo(setTodo) {
+  localStorage.setItem("Array", JSON.stringify(setTodo));
+}
 function clearInput() {
   taskInput.value = "";
   dateInput.value = "";
 }
 function deleteTask(index) {
-  taskList.splice(index, 1);
+  let getTodoList  = getTodo();
+  getTodoList.splice(index, 1);
+  saveTodo(getTodoList );
+  taskList= getTodoList ;
   displayTasks();
 }
