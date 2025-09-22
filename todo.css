@@ -23,15 +23,8 @@ h1{
     padding: 10px;
 
 }
-.task-container{
-    text-shadow: 2px 2px 4px rgba(190, 82, 82, 0.1);
-    font-size: 15px;
-    font-style: oblique;
-    
-    overflow-y: auto;
-    text-wrap: balance;
-}
 #task-input, #date-input{
+    display: block;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -41,6 +34,7 @@ h1{
     text-shadow: 2px 2px 4px rgba(190, 82, 82, 0.1);
     font-style: oblique;
 }
+
 .addTask-btn{
     padding: 10px 20px;
     background-color: #4CAF50;
@@ -61,6 +55,22 @@ h1{
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    box-shadow: 5px 7px 9px rgba(208, 58, 150, 0.2);
+    box-shadow: 5px 5px 7px rgba(87, 4, 29, 0.2);
     transition: background-color 0.3s ease;
 }
+.btn-delete:hover{
+    background-color: #da190b;
+}
+
+@media (max-width: 600px) {
+    #input-container {
+        grid-template-columns: 1fr;
+    }
+    .task-container {
+        grid-template-columns: repeat(auto-fit);
+        gap: 5px;
+        max-width: 100%;
+        grid-template-columns: 3/1fr;
+
+    }
+} 

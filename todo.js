@@ -41,9 +41,12 @@ function displayTasks() {
   for (let i = 0; i < taskList.length; i++) {
     let { item, dueDate } = taskList[i];
     newHtml += `
-        <span>${item}</span>
-        <span>${dueDate}</span>
+        
+        <span id="item">${item}</span>
+        <span id="date">${dueDate}</span>
         <button class='btn-delete' onclick="deleteTask(${i})">Delete</button>
+        
+        
       `;
   }
   taskcontainer.innerHTML = newHtml;
