@@ -13,8 +13,7 @@ let addTaskBtn = document.querySelector(".addTask-btn");
 let dateInput = document.querySelector("#date-input");
 displayTasks();
 addTaskBtn.addEventListener("click", () => {
-
-if (!taskInput.value || !dateInput.value) {
+  if (!taskInput.value || !dateInput.value) {
     alert("Please fill the complete form");
     return; // stop execution agar empty hai
   }
@@ -28,11 +27,12 @@ if (!taskInput.value || !dateInput.value) {
   saveTodo(taskList);
   displayTasks();
   clearInput();
-  
 });
 
 function displayTasks() {
-  let storedTaskList = getTodo();
+  let storedTaskList = [];
+  storedTaskList = getTodo() || taskList;
+
   let taskcontainer = document.querySelector(".task-container");
   let newHtml = "";
   for (let i = 0; i < storedTaskList.length; i++) {
@@ -41,9 +41,7 @@ function displayTasks() {
         
         <span id="item">${item}</span>
         <span id="date">${dueDate}</span>
-        <button class='btn-delete' onclick="deleteTask(${
-          (i)
-        })">Delete</button>
+        <button class='btn-delete' onclick="deleteTask(${i})">Delete</button>
       `;
   }
   taskcontainer.innerHTML = newHtml;
@@ -60,9 +58,9 @@ function clearInput() {
   dateInput.value = "";
 }
 function deleteTask(index) {
-  let getTodoList  = getTodo();
+  let getTodoList = getTodo();
   getTodoList.splice(index, 1);
-  saveTodo(getTodoList );
-  taskList= getTodoList ;
+  saveTodo(getTodoList);
+  taskList = getTodoList;
   displayTasks();
 }
