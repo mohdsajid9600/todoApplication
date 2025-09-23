@@ -62,16 +62,17 @@ h1 {
 .btn-delete:hover {
   background-color: #da190b;
 }
-input[type="date"]::-webkit-calendar-picker-indicator {
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   background: url("images/calender.png") no-repeat center;
   background-size: 16px;
   cursor: pointer;
   opacity: 0.8;
 }
-input[type="date"]::-webkit-datetime-edit {
+input[type="datetime-local"]::-webkit-datetime-edit {
   padding: 0 4px;
   color: #e0d041;
 }
+
 @media (max-width: 600px) {
   #input-container {
     grid-template-columns: 1fr;
